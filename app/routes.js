@@ -105,7 +105,7 @@ module.exports = function(app, passport) {
 				//res.json({ message: 'Beer added to the locker!', data: beer });
 			});
 		}
-	  }
+	  });
 	});
 	
 	// Create endpoint /api/beers for GET

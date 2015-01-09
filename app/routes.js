@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-    app.get('/', function(req, res) {
+    app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( function(error, beers){
 			res.render('index', { title: 'ToDo List with Mongoose and Express', h1: 'ToDo List', beers: beers});
 		});
@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/profile', // redirect to the secure profile section
+		successRedirect : '/', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
@@ -105,7 +105,7 @@ module.exports = function(app, passport) {
 				//res.json({ message: 'Beer added to the locker!', data: beer });
 			});
 		}
-	  }
+	  });
 	});
 	
 	// Create endpoint /api/beers for GET
@@ -125,16 +125,15 @@ module.exports = function(app, passport) {
 		if (err)
 		  res.send(err);
 		beer.save( function(error){
-		  res.redirect('/');
+		  res.render('beerprofile', {beer : beer});
 		});
-		//res.json(beer);
 	  });
 	});
 	
 	// Create endpoint /api/beers/:beer_id for PUT
-	app.put('/beers/:beer_id', function(req, res) {
+	app.post('/updatebeer/:beer_id', function(req, res) {
 	  // Use the Beer model to find a specific beer
-	  beer.findById(req.params.beer_id, function(err, beer) {
+	  Beers.findById(req.params.beer_id, function(err, beer) {
 		if (err)
 		  res.send(err);
 
@@ -146,7 +145,7 @@ module.exports = function(app, passport) {
 		  if (err)
 			res.send(err);
 
-		  res.json(beer);
+		  res.redirect('/');
 		});
 	  });
 	});
@@ -181,5 +180,5 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/login');
 }

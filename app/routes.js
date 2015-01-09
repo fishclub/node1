@@ -131,9 +131,9 @@ module.exports = function(app, passport) {
 	});
 	
 	// Create endpoint /api/beers/:beer_id for PUT
-	app.put('/beers/:beer_id', function(req, res) {
+	app.post('/updatebeer/:beer_id', function(req, res) {
 	  // Use the Beer model to find a specific beer
-	  beer.findById(req.params.beer_id, function(err, beer) {
+	  Beers.findById(req.params.beer_id, function(err, beer) {
 		if (err)
 		  res.send(err);
 
@@ -145,7 +145,7 @@ module.exports = function(app, passport) {
 		  if (err)
 			res.send(err);
 
-		  res.json(beer);
+		  res.redirect('/');
 		});
 	  });
 	});

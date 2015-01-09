@@ -20,7 +20,24 @@
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+		 <!-- LOGIN FORM -->
+    <form action="/updatebeer/<%= beer._id %>" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" value="<%= beer.name %>">
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <input type="text" class="form-control" name="type" value="<%= beer.type %>">
+        </div>
+		<div class="form-group">
+            <label>Quantity</label>
+            <input type="text" class="form-control" name="quantity" value="<%= beer.quantity %>">
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg">Update</button>
+    </form>
+        <!-- <div class="col-sm-6">
             <div class="well">
                 <h3><span class="fa fa-user"></span> Local</h3>
 
@@ -32,7 +49,7 @@
                     </p>
 
             </div>
-        </div>
+        </div>-->
 
     </div>
 

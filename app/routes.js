@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-    app.get('/', function(req, res) {
+    app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( function(error, beers){
 			res.render('index', { title: 'ToDo List with Mongoose and Express', h1: 'ToDo List', beers: beers});
 		});
@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/profile', // redirect to the secure profile section
+		successRedirect : '/', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
@@ -180,5 +180,5 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.redirect('/login');
 }

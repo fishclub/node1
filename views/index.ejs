@@ -27,7 +27,7 @@
 	<div class="row-fluid">
     	<div class="list offset3 span6">
     	<table class="table table-hover table-bordered">
-    	<thead class="span6"><tr><th>Beer List</th></tr></thead>
+    	<thead class="span6"><tr><th> <h4><span class="fa fa-cutlery"></span> Beer List </h4></th></tr></thead>
         <tbody>
             <% beers.forEach( function (beer){ %>
     		<tr><td><a href="/beers/<%= beer._id %>"> <%= beer.name %> </a> | <a href="/delete/<%= beer._id %>"> remove </a></td></tr>

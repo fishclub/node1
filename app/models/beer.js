@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 
 // Define our beer schema
 var beerSchema   = new mongoose.Schema({
+  username: String,	
   name: String,
   type: String,
   quantity: Number

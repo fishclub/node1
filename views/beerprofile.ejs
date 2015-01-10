@@ -12,10 +12,13 @@
 <body>
 <div class="container">
 
+<div class="col-sm-6 col-sm-offset-3">
+
     <h1><span class="fa fa-sign-in"></span> Edit Beer</h1>
 
-        <!-- LOCAL INFORMATION -->
-		 <!-- LOGIN FORM -->
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
     <form action="/updatebeer/<%= beer._id %>" method="post">
         <div class="form-group">
             <label>Name</label>
@@ -50,7 +53,7 @@
 
     <p>Or go <a href="/">home</a>.</p>
 
-
+</div>
 </div>
 </body>
 </html>

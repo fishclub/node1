@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
 	var User = require('./models/user');
 	
     app.get('/', isLoggedIn, function(req, res) {
-		Beers.find( function(error, beers){
+		Beers.find( {username: req.user.local.email}, function(error, beers){
 			res.render('index', { title: 'ToDo List with Mongoose and Express', h1: 'ToDo List', beers: beers});
 		});
         //res.render('index.ejs'); // load the index.ejs file
@@ -54,12 +54,12 @@ module.exports = function(app, passport) {
     }));
 	
 	app.post('/beers', function(req, res) {
-	  Beers.findOne({ 'name' :  req.body.name }, function(err, beer) {
+	  Beers.findOne({ 'name' :  req.body.name, 'username' :  req.user.local.email }, function(err, beer) {
 		if (err)
 			return done(err);
-
+		
 		if (beer) {
-			return done(null, false, req.flash('signupMessage', 'That name is already taken.'));
+			res.render('beer', { message: 'The Name Already Exist.' , beer: beer});
 		} else {
 			var tempbeer = new Beers();
 			tempbeer.username = req.user.local.email;
@@ -92,7 +92,7 @@ module.exports = function(app, passport) {
 		if (err)
 		  res.send(err);
 		beer.save( function(error){
-		  res.render('beerprofile', {beer : beer});
+		  res.render('beerprofile', {message: '', beer : beer});
 		});
 	  });
 	});
@@ -102,6 +102,8 @@ module.exports = function(app, passport) {
 		if (err)
 		  res.send(err);
 
+		beer.name = req.body.name;
+		beer.type = req.body.type;
 		beer.quantity = req.body.quantity;
 		beer.save(function(err) {
 		  if (err)
@@ -121,13 +123,15 @@ module.exports = function(app, passport) {
 	});
 	
 	app.get('/addbeer', function(req, res) {
-        res.render('beer.ejs', { message: req.flash('loginMessage') }); 
+		beer = new Beers();
+		beer.name = '';
+		beer.type = '';
+		beer.quantity = 0;
+        res.render('beer', {message: '', beer: beer}); 
     });
 	
 	app.get('/beerprofile', function(req, res) {
-        res.render('beerprofile.ejs', {
-            beer : req.beer
-        });
+        res.render('beerprofile.ejs', { message: '', beer : req.beer });
     });
 
 };

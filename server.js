@@ -16,6 +16,9 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
+var util = require('util');
+var expressValidator = require('express-validator');
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -25,6 +28,25 @@ require('./config/passport')(passport); // pass passport for configuration
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
+app.use(expressValidator()); // this line must be immediately after express.bodyParser()!
+
+app.get('/test', function(req, res) {
+	req.checkBody('postparam', 'Invalid postparam').notEmpty().isInt();
+	req.checkParams('urlparam', 'Invalid urlparam').isAlpha();
+	req.checkQuery('getparam', 'Invalid getparam').isInt();
+	req.sanitize('postparam').toBoolean();
+
+	var errors = req.validationErrors();
+		if (errors) {
+		res.send('There have been validation errors: ' + util.inspect(errors), 400);
+		return;
+	}
+	res.json({
+		urlparam: req.param('urlparam'),
+		getparam: req.param('getparam'),
+		postparam: req.param('postparam')
+	});
+});
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 

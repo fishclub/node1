@@ -38,14 +38,10 @@ app.get('/test', function(req, res) {
 
 	var errors = req.validationErrors();
 		if (errors) {
-		res.send('There have been validation errors: ' + util.inspect(errors), 400);
-		return;
+			res.render('addnote.ejs', { message: 'There have been validation errors: ' + util.inspect(errors) }); 
+		//res.send('There have been validation errors: ' + util.inspect(errors), 400);
+		//return;
 	}
-	res.json({
-		urlparam: req.param('urlparam'),
-		getparam: req.param('getparam'),
-		postparam: req.param('postparam')
-	});
 });
 
 app.set('view engine', 'ejs'); // set up ejs for templating

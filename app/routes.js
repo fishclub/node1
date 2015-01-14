@@ -4,6 +4,7 @@ module.exports = function(app, passport) {
 	var Beers = require('./models/beer');
 	var beer = new Beers();
 	var User = require('./models/user');
+	var util = require('util');
 	
     app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( {username: req.user.local.email}, function(error, beers){
@@ -54,10 +55,14 @@ module.exports = function(app, passport) {
     }));
 	
 	app.post('/beers', function(req, res) {
+	req.checkBody(req.body.name, 'Invalid name').notEmpty();
+	var errors = req.validationErrors();
+	if (errors)
+		res.render('beer', { message: util.inspect(errors), beer: beer }); 
+			
 	  Beers.findOne({ 'name' :  req.body.name, 'username' :  req.user.local.email }, function(err, beer) {
 		if (err)
 			return done(err);
-		
 		if (beer) {
 			res.render('beer', { message: 'The Name Already Exist.' , beer: beer});
 		} else {

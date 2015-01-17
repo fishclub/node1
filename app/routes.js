@@ -55,10 +55,14 @@ module.exports = function(app, passport) {
     }));
 	
 	app.post('/beers', function(req, res) {
-	req.checkBody(req.body.name, 'Invalid name').notEmpty();
+	req.checkBody('name', 'Invalid Name').notEmpty();
+	req.checkBody('type', 'Invalid Type').notEmpty();
 	var errors = req.validationErrors();
-	if (errors)
-		res.render('beer', { message: util.inspect(errors), beer: beer }); 
+	if (errors) {
+		beer.name = req.body.name;
+		beer.type = req.body.type;
+		res.render('beer', { flash: { type: 'alert alert-danger', messages: errors }, message: '', beer: beer }); 
+	} else {
 			
 	  Beers.findOne({ 'name' :  req.body.name, 'username' :  req.user.local.email }, function(err, beer) {
 		if (err)
@@ -81,6 +85,7 @@ module.exports = function(app, passport) {
 			});
 		}
 	  });
+	}
 	});
 	
 	app.get('/beers', function(req, res) {
@@ -132,7 +137,7 @@ module.exports = function(app, passport) {
 		beer.name = '';
 		beer.type = '';
 		beer.quantity = 0;
-        res.render('beer', {message: '', beer: beer}); 
+        res.render('beer', {flash: {type: 'alert alert-danger', messages: ''}, message: '', beer: beer}); 
     });
 	
 	app.get('/beerprofile', function(req, res) {

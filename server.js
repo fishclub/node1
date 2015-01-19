@@ -45,6 +45,10 @@ app.get('/test1', function(req, res) {
 	}
 });
 
+app.get('/indextemp', function(req, res) {
+	res.render('indextemp');
+});
+
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport

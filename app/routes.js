@@ -4,7 +4,6 @@ module.exports = function(app, passport) {
 	var Beers = require('./models/beer');
 	var beer = new Beers();
 	var User = require('./models/user');
-	var util = require('util');
 	
     app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( {username: req.user.local.email}, function(error, beers){
@@ -53,6 +52,14 @@ module.exports = function(app, passport) {
         failureRedirect : '/addnote', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
+
+    app.get('/addbeer', function(req, res) {
+		beer = new Beers();
+		beer.name = '';
+		beer.type = '';
+		beer.quantity = 0;
+        res.render('beer', {flash: {type: 'alert alert-danger', messages: ''}, message: '', beer: beer}); 
+    });
 	
 	app.post('/beers', function(req, res) {
 	req.checkBody('name', 'Invalid Name').notEmpty();
@@ -132,13 +139,6 @@ module.exports = function(app, passport) {
 	  });
 	});
 	
-	app.get('/addbeer', function(req, res) {
-		beer = new Beers();
-		beer.name = '';
-		beer.type = '';
-		beer.quantity = 0;
-        res.render('beer', {flash: {type: 'alert alert-danger', messages: ''}, message: '', beer: beer}); 
-    });
 	
 	app.get('/beerprofile', function(req, res) {
         res.render('beerprofile.ejs', { message: '', beer : req.beer });

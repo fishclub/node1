@@ -1,26 +1,202 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'gulp', '-g', 'glup' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose run-script [ 'prestart', 'start', 'poststart' ]
-5 info prestart node-authentication@0.1.0-1
-6 info start node-authentication@0.1.0-1
-7 verbose unsafe-perm in lifecycle true
-8 info node-authentication@0.1.0-1 Failed to exec start script
-9 error node-authentication@0.1.0-1 start: `node server.js`
-9 error Exit status 8
-10 error Failed at the node-authentication@0.1.0-1 start script.
-10 error This is most likely a problem with the node-authentication package,
-10 error not with npm itself.
-10 error Tell the author that this fails on your system:
-10 error     node server.js
-10 error You can get their info via:
-10 error     npm owner ls node-authentication
-10 error There is likely additional logging output above.
-11 error System Darwin 13.4.0
-12 error command "node" "/usr/local/bin/npm" "start"
-13 error cwd /Users/first/Documents/TestCode/myapp/node1
-14 error node -v v0.10.32
-15 error npm -v 1.4.28
-16 error code ELIFECYCLE
-17 verbose exit [ 1, true ]
+4 verbose cache add [ 'gulp', null ]
+5 verbose cache add name=undefined spec="gulp" args=["gulp",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'gulp',
+6 verbose parsed url   path: 'gulp',
+6 verbose parsed url   href: 'gulp' }
+7 verbose cache add [ 'glup', null ]
+8 verbose cache add name=undefined spec="glup" args=["glup",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'glup',
+9 verbose parsed url   path: 'glup',
+9 verbose parsed url   href: 'glup' }
+10 silly lockFile 9750c68d-gulp gulp
+11 verbose lock gulp /Users/first/.npm/9750c68d-gulp.lock
+12 silly lockFile 55a217f8-glup glup
+13 verbose lock glup /Users/first/.npm/55a217f8-glup.lock
+14 silly lockFile 9750c68d-gulp gulp
+15 silly lockFile 9750c68d-gulp gulp
+16 silly lockFile 55a217f8-glup glup
+17 silly lockFile 55a217f8-glup glup
+18 verbose addNamed [ 'gulp', '' ]
+19 verbose addNamed [ null, '*' ]
+20 silly lockFile 72f4391e-gulp gulp@
+21 verbose lock gulp@ /Users/first/.npm/72f4391e-gulp.lock
+22 verbose addNamed [ 'glup', '' ]
+23 verbose addNamed [ null, '*' ]
+24 silly lockFile 5f2e066f-glup glup@
+25 verbose lock glup@ /Users/first/.npm/5f2e066f-glup.lock
+26 silly addNameRange { name: 'gulp', range: '*', hasData: false }
+27 silly addNameRange { name: 'glup', range: '*', hasData: false }
+28 verbose request where is /glup
+29 verbose request registry https://registry.npmjs.org/
+30 verbose request id 118f97a7a004368f
+31 verbose url raw /glup
+32 verbose url resolving [ 'https://registry.npmjs.org/', './glup' ]
+33 verbose url resolved https://registry.npmjs.org/glup
+34 verbose request where is https://registry.npmjs.org/glup
+35 info trying registry request attempt 1 at 10:39:39
+36 http GET https://registry.npmjs.org/glup
+37 verbose request where is /gulp
+38 verbose request registry https://registry.npmjs.org/
+39 verbose url raw /gulp
+40 verbose url resolving [ 'https://registry.npmjs.org/', './gulp' ]
+41 verbose url resolved https://registry.npmjs.org/gulp
+42 verbose request where is https://registry.npmjs.org/gulp
+43 info trying registry request attempt 1 at 10:39:40
+44 verbose etag "BELTTOQOXGW82NS5CAW6HVPC5"
+45 http GET https://registry.npmjs.org/gulp
+46 http 304 https://registry.npmjs.org/gulp
+47 silly registry.get cb [ 304,
+47 silly registry.get   { date: 'Mon, 19 Jan 2015 03:39:41 GMT',
+47 silly registry.get     server: 'Apache',
+47 silly registry.get     via: '1.1 varnish',
+47 silly registry.get     'last-modified': 'Mon, 19 Jan 2015 03:39:41 GMT',
+47 silly registry.get     'cache-control': 'max-age=60',
+47 silly registry.get     etag: '"BELTTOQOXGW82NS5CAW6HVPC5"',
+47 silly registry.get     age: '43',
+47 silly registry.get     'x-served-by': 'cache-sjc3129-SJC',
+47 silly registry.get     'x-cache': 'HIT',
+47 silly registry.get     'x-cache-hits': '1',
+47 silly registry.get     'x-timer': 'S1421638781.567909,VS0,VE0',
+47 silly registry.get     vary: 'Accept',
+47 silly registry.get     'content-length': '0',
+47 silly registry.get     'keep-alive': 'timeout=10, max=50',
+47 silly registry.get     connection: 'Keep-Alive' } ]
+48 verbose etag https://registry.npmjs.org/gulp from cache
+49 silly addNameRange number 2 { name: 'gulp', range: '*', hasData: true }
+50 silly addNameRange versions [ 'gulp',
+50 silly addNameRange   [ '0.0.1',
+50 silly addNameRange     '0.0.2',
+50 silly addNameRange     '0.0.3',
+50 silly addNameRange     '0.0.4',
+50 silly addNameRange     '0.0.5',
+50 silly addNameRange     '0.0.7',
+50 silly addNameRange     '0.0.8',
+50 silly addNameRange     '0.0.9',
+50 silly addNameRange     '0.1.0',
+50 silly addNameRange     '0.2.0',
+50 silly addNameRange     '1.0.0',
+50 silly addNameRange     '1.1.0',
+50 silly addNameRange     '1.2.0',
+50 silly addNameRange     '1.2.1',
+50 silly addNameRange     '2.0.0',
+50 silly addNameRange     '2.0.1',
+50 silly addNameRange     '2.1.0',
+50 silly addNameRange     '2.2.0',
+50 silly addNameRange     '2.3.0',
+50 silly addNameRange     '2.4.0',
+50 silly addNameRange     '2.4.1',
+50 silly addNameRange     '2.6.0',
+50 silly addNameRange     '2.6.1',
+50 silly addNameRange     '2.7.0',
+50 silly addNameRange     '3.0.0',
+50 silly addNameRange     '3.1.1',
+50 silly addNameRange     '3.1.2',
+50 silly addNameRange     '3.1.3',
+50 silly addNameRange     '3.1.4',
+50 silly addNameRange     '3.2.0',
+50 silly addNameRange     '3.2.1',
+50 silly addNameRange     '3.2.2',
+50 silly addNameRange     '3.2.3',
+50 silly addNameRange     '3.2.4',
+50 silly addNameRange     '3.2.5',
+50 silly addNameRange     '3.3.0',
+50 silly addNameRange     '3.3.1',
+50 silly addNameRange     '3.3.2',
+50 silly addNameRange     '3.3.4',
+50 silly addNameRange     '3.4.0',
+50 silly addNameRange     '3.5.0',
+50 silly addNameRange     '3.5.1',
+50 silly addNameRange     '3.5.2',
+50 silly addNameRange     '3.5.5',
+50 silly addNameRange     '3.5.6',
+50 silly addNameRange     '3.6.0',
+50 silly addNameRange     '3.6.1',
+50 silly addNameRange     '3.6.2',
+50 silly addNameRange     '3.7.0',
+50 silly addNameRange     '3.8.0',
+50 silly addNameRange     '3.8.1',
+50 silly addNameRange     '3.8.2',
+50 silly addNameRange     '3.8.3',
+50 silly addNameRange     '3.8.4',
+50 silly addNameRange     '3.8.5',
+50 silly addNameRange     '3.8.6',
+50 silly addNameRange     '3.8.7',
+50 silly addNameRange     '3.8.8',
+50 silly addNameRange     '3.8.9',
+50 silly addNameRange     '3.8.10' ] ]
+51 verbose addNamed [ 'gulp', '3.8.10' ]
+52 verbose addNamed [ '3.8.10', '3.8.10' ]
+53 silly lockFile f843d0d7-gulp-3-8-10 gulp@3.8.10
+54 verbose lock gulp@3.8.10 /Users/first/.npm/f843d0d7-gulp-3-8-10.lock
+55 silly lockFile f843d0d7-gulp-3-8-10 gulp@3.8.10
+56 silly lockFile f843d0d7-gulp-3-8-10 gulp@3.8.10
+57 silly lockFile 72f4391e-gulp gulp@
+58 silly lockFile 72f4391e-gulp gulp@
+59 http 404 https://registry.npmjs.org/glup
+60 verbose headers { date: 'Mon, 19 Jan 2015 03:39:41 GMT',
+60 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+60 verbose headers   'content-type': 'application/json',
+60 verbose headers   'cache-control': 'max-age=0',
+60 verbose headers   'content-length': '52',
+60 verbose headers   'accept-ranges': 'bytes',
+60 verbose headers   via: '1.1 varnish',
+60 verbose headers   age: '0',
+60 verbose headers   'x-served-by': 'cache-sjc3124-SJC',
+60 verbose headers   'x-cache': 'MISS',
+60 verbose headers   'x-cache-hits': '0',
+60 verbose headers   'x-timer': 'S1421638781.566662,VS0,VE85',
+60 verbose headers   'keep-alive': 'timeout=10, max=50',
+60 verbose headers   connection: 'Keep-Alive' }
+61 silly registry.get cb [ 404,
+61 silly registry.get   { date: 'Mon, 19 Jan 2015 03:39:41 GMT',
+61 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+61 silly registry.get     'content-type': 'application/json',
+61 silly registry.get     'cache-control': 'max-age=0',
+61 silly registry.get     'content-length': '52',
+61 silly registry.get     'accept-ranges': 'bytes',
+61 silly registry.get     via: '1.1 varnish',
+61 silly registry.get     age: '0',
+61 silly registry.get     'x-served-by': 'cache-sjc3124-SJC',
+61 silly registry.get     'x-cache': 'MISS',
+61 silly registry.get     'x-cache-hits': '0',
+61 silly registry.get     'x-timer': 'S1421638781.566662,VS0,VE85',
+61 silly registry.get     'keep-alive': 'timeout=10, max=50',
+61 silly registry.get     connection: 'Keep-Alive' } ]
+62 silly lockFile 5f2e066f-glup glup@
+63 silly lockFile 5f2e066f-glup glup@
+64 error 404 404 Not Found: glup
+64 error 404
+64 error 404 'glup' is not in the npm registry.
+64 error 404 You should bug the author to publish it
+64 error 404
+64 error 404 Note that you can also install from a
+64 error 404 tarball, folder, or http url, or git url.
+65 error System Darwin 13.4.0
+66 error command "node" "/usr/local/bin/npm" "install" "gulp" "-g" "glup"
+67 error cwd /Users/first/Documents/TestCode/myapp/node1
+68 error node -v v0.10.32
+69 error npm -v 1.4.28
+70 error code E404
+71 verbose exit [ 1, true ]

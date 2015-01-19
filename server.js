@@ -19,6 +19,7 @@ var configDB = require('./config/database.js');
 var util = require('util');
 var expressValidator = require('express-validator');
 
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -30,7 +31,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 app.use(expressValidator()); // this line must be immediately after express.bodyParser()!
 
-app.get('/test', function(req, res) {
+app.get('/test1', function(req, res) {
 	req.checkBody('postparam', 'Invalid postparam').notEmpty().isInt();
 	req.checkParams('urlparam', 'Invalid urlparam').isAlpha();
 	req.checkQuery('getparam', 'Invalid getparam').isInt();

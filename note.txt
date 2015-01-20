@@ -1,0 +1,7 @@
+Site List
+
+Make use of Bootstrap's modal more monkey-friendly.
+http://nakupanda.github.io/bootstrap3-dialog/
+
+dialog example
+http://plnkr.co/edit/MfUbnHJczNlATA2euzRf?p=preview

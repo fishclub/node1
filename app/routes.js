@@ -3,11 +3,16 @@ module.exports = function(app, passport) {
 
 	var Beers = require('./models/beer');
 	var beer = new Beers();
+	var beersall = new Beers();
 	var User = require('./models/user');
 	
     app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( {username: req.user.local.email}, function(error, beers){
-			res.render('index', { title: 'ToDo List with Mongoose and Express', h1: 'ToDo List', beers: beers});
+			beersall = beers;
+			beer.name = '';
+			beer.type = '';
+			beer.quantity = '';
+			res.render('index', { message: '', beers: beers, beer: beer});
 		});
         //res.render('index.ejs'); // load the index.ejs file
     });
@@ -58,6 +63,7 @@ module.exports = function(app, passport) {
 		beer.name = '';
 		beer.type = '';
 		beer.quantity = 0;
+		req.flash('error', 'Could not update your name, please contact our support team');
         res.render('beer', {flash: {type: 'alert alert-danger', messages: ''}, message: '', beer: beer}); 
     });
 	
@@ -75,7 +81,7 @@ module.exports = function(app, passport) {
 		if (err)
 			return done(err);
 		if (beer) {
-			res.render('beer', { message: 'The Name Already Exist.' , beer: beer});
+			res.render('index', { message: 'The Name Already Exist.' , beers: beersall, beer: beer});
 		} else {
 			var tempbeer = new Beers();
 			tempbeer.username = req.user.local.email;

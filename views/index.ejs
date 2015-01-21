@@ -24,14 +24,17 @@
 		<a href="/addbeer" class="btn btn-default"><span class="fa fa-user"></span> Add Beer</a>
 		<a href="/logout" class="btn btn-default"><span class="fa fa-user"></span> Logout</a>
     </div>
-
+	<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
 	<div class="row-fluid">
-    	<div class="list offset3 span6">
-    	<table class="table table-hover table-bordered">
-    	<thead class="span6"><tr><th> <h4><span class="fa fa-cutlery"></span> Beer List </h4></th></tr></thead>
+    	<div>
+    	<table class="table table-striped">
+    	<thead><tr><th>Name</th><th>Quantity</th><th>Edit</th><th>Delete</th></tr></thead>
         <tbody>
             <% beers.forEach( function (beer){ %>
-    		<tr><td><%= beer.name %> | <a class="btn btn-success" href="/beers/<%= beer._id %>"> Edit </a> | 
+    		<tr><td><%= beer.name %> </td><td><%= beer.quantity %> </td><td> <a class="btn btn-success" href="/beers/<%= beer._id %>"> Edit </a> </td><td>
             <a data-href="/delete/<%= beer._id%>" class="btn btn-danger" data-toggle="modal" data-target="#basicModal" href="#"> Delete </a></td></tr>
 
             <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -55,6 +58,25 @@
         </tbody>
     	</table>
     	</div>
+	</div>
+	
+	<div>
+	<form action="/beers" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" required placeholder="Enter Name">
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <input type="text" class="form-control" name="type" required placeholder="Enter Type">
+        </div>
+		<div class="form-group">
+            <label>Quantity</label>
+            <input type="text" class="form-control" name="quantity" required placeholder="Enter Quantity">
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg">Add</button>
+    </form>
 	</div>
 </div>
 

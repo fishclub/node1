@@ -114,7 +114,7 @@ module.exports = function(app, passport) {
 		if (err)
 		  res.send(err);
 		beer.save( function(error){
-		  res.render('beerprofile', {message: '', beer : beer});
+		  res.render('index', {message: '', beers: beersall, beer: beer});
 		});
 	  });
 	});

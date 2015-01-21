@@ -12,3 +12,6 @@ git stash save --keep-index
 If you don't need them anymore, you now can drop that stash:
 
 git stash drop
+
+DataTables
+https://datatables.net/manual/installation

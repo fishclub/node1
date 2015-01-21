@@ -71,12 +71,14 @@
         </div>
 		<div class="form-group">
             <label>Quantity</label>
-            <input type="text" class="form-control" name="quantity" value="<%= beer.quantity %>" required placeholder="Enter Quantity">
+            <input type="number" class="form-control" name="quantity" value="<%= beer.quantity %>" required placeholder="Enter Quantity">
         </div>
 
         <button type="submit" class="btn btn-warning btn-lg">Add</button>
     </form>
 	</div>
+	<hr>
+    <p>Or go <a href="/">home</a>.</p>
 </div>
 
 <script>

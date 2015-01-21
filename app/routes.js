@@ -11,10 +11,9 @@ module.exports = function(app, passport) {
 			beersall = beers;
 			beer.name = '';
 			beer.type = '';
-			beer.quantity = '';
+			beer.quantity = 0;
 			res.render('index', { message: '', beers: beers, beer: beer});
 		});
-        //res.render('index.ejs'); // load the index.ejs file
     });
 
     app.get('/login', function(req, res) {
@@ -52,7 +51,7 @@ module.exports = function(app, passport) {
         res.render('addnote.ejs', { message: req.flash('loginMessage') }); 
     });
 	 
-	app.post('/addnote', passport.authenticate('local-signup', {
+	app.post('/addnote', isLoggedIn, passport.authenticate('local-signup', {
         successRedirect : '/', // redirect to the secure profile section
         failureRedirect : '/addnote', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages

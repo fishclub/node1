@@ -5,3 +5,10 @@ http://nakupanda.github.io/bootstrap3-dialog/
 
 dialog example
 http://plnkr.co/edit/MfUbnHJczNlATA2euzRf?p=preview
+
+If you want remove all local changes from your working copy, simply stash them:
+
+git stash save --keep-index
+If you don't need them anymore, you now can drop that stash:
+
+git stash drop

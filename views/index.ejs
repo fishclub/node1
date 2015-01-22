@@ -67,7 +67,11 @@
 	</div>
 	<hr>
 	<div>
-	<form action="/beers" method="post">
+		<% if (isNew) { %>
+			<form action="/beers" method="post">
+		<% } else { %>
+			<form action="/updatebeer/<%= beer._id %>" method="post">
+		<% } %>
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" name="name" value="<%= beer.name %>" required placeholder="Enter Name">
@@ -80,8 +84,11 @@
             <label>Quantity</label>
             <input type="number" class="form-control" name="quantity" value="<%= beer.quantity %>" required placeholder="Enter Quantity">
         </div>
-
-        <button type="submit" class="btn btn-warning">Add</button>
+		<% if (isNew) { %>
+			<button type="submit" class="btn btn-warning">Add</button>
+		<% } else { %>
+			<button type="submit" class="btn btn-warning">Update</button>
+		<% } %>
     </form>
 	</div>
 	<hr>

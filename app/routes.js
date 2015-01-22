@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
 			beer.name = '';
 			beer.type = '';
 			beer.quantity = 0;
-			res.render('index', { message: '', beers: beers, beer: beer});
+			res.render('index', { message: '', beers: beers, beer: beer, isNew: true});
 		});
     });
 
@@ -73,7 +73,7 @@ module.exports = function(app, passport) {
 	if (errors) {
 		beer.name = req.body.name;
 		beer.type = req.body.type;
-		res.render('beer', { flash: { type: 'alert alert-danger', messages: errors }, message: '', beer: beer }); 
+		res.render('beer', { flash: { type: 'alert alert-danger', messages: errors }, message: '', beer: beer, isNew: true }); 
 	} else {
 			
 	  Beers.findOne({ 'name' :  req.body.name, 'username' :  req.user.local.email }, function(err, beer) {
@@ -114,7 +114,7 @@ module.exports = function(app, passport) {
 		if (err)
 		  res.send(err);
 		beer.save( function(error){
-		  res.render('index', {message: '', beers: beersall, beer: beer});
+		  res.render('index', {message: '', beers: beersall, beer: beer, isNew: false});
 		});
 	  });
 	});

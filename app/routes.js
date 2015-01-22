@@ -80,7 +80,7 @@ module.exports = function(app, passport) {
 		if (err)
 			return done(err);
 		if (beer) {
-			res.render('index', { message: 'The Name Already Exist.' , beers: beersall, beer: beer});
+			res.render('index', { message: 'The Name Already Exist.' , beers: beersall, beer: beer, isNew: true});
 		} else {
 			var tempbeer = new Beers();
 			tempbeer.username = req.user.local.email;
@@ -89,11 +89,10 @@ module.exports = function(app, passport) {
 			tempbeer.quantity = req.body.quantity;
 
 			// Save the beer and check for errors
-			tempbeer.save(function(err, Beers) {
+			tempbeer.save(function(err, beer) {
 			if (err)
 				res.send(err);
-			res.redirect('/');
-				//res.json({ message: 'Beer added to the locker!', data: beer });
+			res.render('index', { message: 'Save Success.', beers: beersall, beer: beer, isNew: false});
 			});
 		}
 	  });
@@ -123,15 +122,13 @@ module.exports = function(app, passport) {
 	  Beers.findById(req.params.beer_id, function(err, beer) {
 		if (err)
 		  res.send(err);
-
 		beer.name = req.body.name;
 		beer.type = req.body.type;
 		beer.quantity = req.body.quantity;
 		beer.save(function(err) {
-		  if (err)
+		if (err)
 			res.send(err);
-
-		  res.redirect('/');
+		res.render('index', { message: 'Update Success.', beers: beersall, beer: beer, isNew: false});
 		});
 	  });
 	});

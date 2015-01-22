@@ -31,17 +31,14 @@
 		<a href="/addbeer" class="btn btn-default"><span class="fa fa-user"></span> Add Beer</a>
 		<a href="/logout" class="btn btn-default"><span class="fa fa-user"></span> Logout</a>
     </div>
-	<% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
 	<div class="row-fluid">
     	<div>
     	<table id="mainTable" class="table table-striped">
     	<thead><tr><th>Name</th><th>Quantity</th><th>Edit</th><th>Delete</th></tr></thead>
         <tbody>
             <% beers.forEach( function (beer){ %>
-    		<tr><td><%= beer.name %> </td><td><%= beer.quantity %> </td><td> <a class="btn btn-success" href="/beers/<%= beer._id %>"> Edit </a> </td><td>
-            <a data-href="/delete/<%= beer._id%>" class="btn btn-danger" data-toggle="modal" data-target="#basicModal" href="#"> Delete </a></td></tr>
+    		<tr><td><%= beer.name %> </td><td><%= beer.quantity %> </td><td> <a class="btn btn-success" href="/beers/<%= beer._id %>">Edit</a> </td><td>
+            <a data-href="/delete/<%= beer._id%>" class="btn btn-danger" data-toggle="modal" data-target="#basicModal" href="#">Delete</a></td></tr>
 
             <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -67,6 +64,9 @@
 	</div>
 	<hr>
 	<div>
+		<% if (message.length > 0) { %>
+			<div class="alert alert-danger"><%= message %></div>
+		<% } %>
 		<% if (isNew) { %>
 			<form action="/beers" method="post">
 		<% } else { %>
@@ -89,6 +89,7 @@
 		<% } else { %>
 			<button type="submit" class="btn btn-warning">Update</button>
 		<% } %>
+		<a class="btn btn-warning" href="/">Reset</a> 
     </form>
 	</div>
 	<hr>

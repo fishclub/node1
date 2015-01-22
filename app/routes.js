@@ -8,7 +8,6 @@ module.exports = function(app, passport) {
 	
     app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( {username: req.user.local.email}, function(error, beers){
-			beersall = beers;
 			beer.name = '';
 			beer.type = '';
 			beer.quantity = 0;
@@ -80,7 +79,9 @@ module.exports = function(app, passport) {
 		if (err)
 			return done(err);
 		if (beer) {
-			res.render('index', { message: 'The Name Already Exist.' , beers: beersall, beer: beer, isNew: true});
+			Beers.find( {username: req.user.local.email}, function(error, beers){
+				res.render('index', { message: 'The Name Already Exist.' , beers: beers, beer: beer, isNew: true});
+			});			
 		} else {
 			var tempbeer = new Beers();
 			tempbeer.username = req.user.local.email;
@@ -92,7 +93,10 @@ module.exports = function(app, passport) {
 			tempbeer.save(function(err, beer) {
 			if (err)
 				res.send(err);
-			res.render('index', { message: 'Save Success.', beers: beersall, beer: beer, isNew: false});
+				
+			Beers.find( {username: req.user.local.email}, function(error, beers){
+				res.render('index', { message: 'Save Success.' , beers: beers, beer: beer, isNew: false});
+			});		
 			});
 		}
 	  });
@@ -113,7 +117,9 @@ module.exports = function(app, passport) {
 		if (err)
 		  res.send(err);
 		beer.save( function(error){
-		  res.render('index', {message: '', beers: beersall, beer: beer, isNew: false});
+			Beers.find( {username: req.user.local.email}, function(error, beers){
+				res.render('index', {message: '', beers: beers, beer: beer, isNew: false});
+			});		
 		});
 	  });
 	});
@@ -128,7 +134,9 @@ module.exports = function(app, passport) {
 		beer.save(function(err) {
 		if (err)
 			res.send(err);
-		res.render('index', { message: 'Update Success.', beers: beersall, beer: beer, isNew: false});
+		Beers.find( {username: req.user.local.email}, function(error, beers){
+			res.render('index', { message: 'Update Success.', beers: beers, beer: beer, isNew: false});
+		});
 		});
 	  });
 	});

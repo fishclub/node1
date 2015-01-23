@@ -16,3 +16,6 @@ git stash drop
 
 DataTables
 https://datatables.net/manual/installation
+
+node design
+http://www.terlici.com/2014/08/25/best-practices-express-structure.html

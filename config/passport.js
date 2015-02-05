@@ -60,6 +60,9 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
+                newUser.local.resetPasswordToken = "Test12345";
+                newUser.local.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
 
 				// save the user
                 newUser.save(function(err) {

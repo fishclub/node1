@@ -154,6 +154,26 @@ module.exports = function(app, passport) {
         res.render('beerprofile.ejs', { message: '', beer : req.beer });
     });
 
+	app.get('/forgot', function(req, res) {
+	  res.render('forgot', {user: req.user, message: ''});
+	});
+
+	app.post('/forgot', function(req, res, next) {
+
+		User.findOne({ 'local.email' :  req.body.email }, function(err, user) {
+            if (!user) {
+            	res.render('forgot', {user: '', message: 'No account with that email address exists.'});
+	        }  else {
+
+		        user.local.resetPasswordToken = "Token12345";
+	        	user.local.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+		        user.save(function(err) {
+		          res.redirect('/');
+		        });
+	    	}
+        });
+	});
 };
 
 function isLoggedIn(req, res, next) {

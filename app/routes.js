@@ -5,6 +5,7 @@ module.exports = function(app, passport) {
 	var beer = new Beers();
 	var beersall = new Beers();
 	var User = require('./models/user');
+	var nodemailer = require('nodemailer');
 	
     app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( {username: req.user.local.email}, function(error, beers){
@@ -169,8 +170,31 @@ module.exports = function(app, passport) {
 	        	user.local.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
 		        user.save(function(err) {
-		          res.redirect('/');
+		          
 		        });
+
+	        	var smtpTransport = nodemailer.createTransport('SMTP', {
+			        service: 'SendGrid',
+			        auth: {
+			          user: 'firstsiam',
+			          pass: '23sendgrid'
+			        }
+		        });
+				var mailOptions = {
+					to: user.local.email,
+					from: 'first@demo.com',
+					subject: 'Node.js Password Reset',
+					text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+					'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+					'http://' + req.headers.host + '/reset/' + user.local.resetPasswordToken + '\n\n' +
+					'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+				};
+				smtpTransport.sendMail(mailOptions, function(err) {
+					req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
+					//done(err, 'done');
+				});
+
+				res.redirect('/');	
 	    	}
         });
 	});

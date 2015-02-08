@@ -18,7 +18,7 @@ var configDB = require('./config/database.js');
 
 var util = require('util');
 var expressValidator = require('express-validator');
-
+var nodemailer = require('nodemailer');
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database

@@ -228,6 +228,14 @@ module.exports = function(app, passport) {
 			res.redirect('/');	
 		});
 	});
+	
+	app.get('/note', function(req, res) {
+		req.flash('error', 'test error1');
+		req.flash('error', 'test error2');
+		req.flash('info', 'test info');
+		req.flash('success', 'test success');
+		res.render('note',  {errors: req.flash('error'), infos: req.flash('info'), successes: req.flash('success')});
+	});
 };
 
 function isLoggedIn(req, res, next) {

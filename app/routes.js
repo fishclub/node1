@@ -173,11 +173,11 @@ module.exports = function(app, passport) {
 		          
 		        });
 
-	        	var smtpTransport = nodemailer.createTransport('SMTP', {
-			        service: 'SendGrid',
+	        	var smtpTransport = nodemailer.createTransport({
+					service: 'Gmail',
 			        auth: {
-			          user: 'firstsiam',
-			          pass: '23sendgrid'
+			          user: 'gainfishclub@gmail.com',
+			          pass: '23gain1299'
 			        }
 		        });
 				var mailOptions = {
@@ -197,6 +197,34 @@ module.exports = function(app, passport) {
 				res.redirect('/');	
 	    	}
         });
+	});
+	
+	app.get('/reset/:token', function(req, res) {
+		User.findOne({'local.resetPasswordToken': req.params.token}, function(err, user) {
+			if (!user) {
+			  req.flash('error', 'Password reset token is invalid or has expired.');
+			  return res.redirect('/forgot');
+			}
+			res.render('reset', {
+			  user: user, message: ''
+			});
+		});
+	});
+	
+	app.post('/reset/:token', function(req, res) {
+		User.findOne({'local.resetPasswordToken' :  req.params.token }, function(err, user) {
+			if (user) {
+				user.local.password = user.generateHash(req.body.password);
+				user.local.resetPasswordToken = "Token12345";
+				user.save(function(err) {
+                    if (err)
+                        throw err;
+                });
+			} else {
+				req.flash('error', 'Reset Password is invalid.');
+			}
+			res.redirect('/');	
+		});
 	});
 };
 

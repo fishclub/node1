@@ -63,6 +63,14 @@ app.use(function(req, res, next){
     next();
 });
 
+app.get('/pagesIndex', function(req, res) {
+    res.render('pages/index');
+});
+
+app.get('/pagesAbout', function(req, res) {
+    res.render('pages/about');
+});
+
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 

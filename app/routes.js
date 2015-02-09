@@ -6,6 +6,7 @@ module.exports = function(app, passport) {
 	var beersall = new Beers();
 	var User = require('./models/user');
 	var nodemailer = require('nodemailer');
+	var crypto = require('crypto');
 	
     app.get('/', isLoggedIn, function(req, res) {
 		Beers.find( {username: req.user.local.email}, function(error, beers){
@@ -159,14 +160,19 @@ module.exports = function(app, passport) {
 	  res.render('forgot', {user: req.user, message: ''});
 	});
 
-	app.post('/forgot', function(req, res, next) {
+	app.post('/forgot', function(req, res, next) {	
+		var token;
+		crypto.randomBytes(20, function(err, buf) {
+			token = buf.toString('hex');
+		});
+		
 
 		User.findOne({ 'local.email' :  req.body.email }, function(err, user) {
             if (!user) {
             	res.render('forgot', {user: '', message: 'No account with that email address exists.'});
 	        }  else {
 
-		        user.local.resetPasswordToken = "Token12345";
+		        user.local.resetPasswordToken = token;
 	        	user.local.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
 		        user.save(function(err) {
@@ -190,11 +196,8 @@ module.exports = function(app, passport) {
 					'If you did not request this, please ignore this email and your password will remain unchanged.\n'
 				};
 				smtpTransport.sendMail(mailOptions, function(err) {
-					req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
-					//done(err, 'done');
+					res.render('forgot', {user: '', message: 'An e-mail has been sent to ' + user.local.email + ' with further instructions.'});
 				});
-
-				res.redirect('/');	
 	    	}
         });
 	});
@@ -215,7 +218,6 @@ module.exports = function(app, passport) {
 		User.findOne({'local.resetPasswordToken' :  req.params.token }, function(err, user) {
 			if (user) {
 				user.local.password = user.generateHash(req.body.password);
-				user.local.resetPasswordToken = "Token12345";
 				user.save(function(err) {
                     if (err)
                         throw err;

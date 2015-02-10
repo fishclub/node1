@@ -16,7 +16,7 @@ module.exports = function(passport) {
     });
 
     passport.use('local-signup', new LocalStrategy({
-        sernameField : 'email',
+        usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true 
     },
@@ -25,9 +25,7 @@ module.exports = function(passport) {
             if (err)
                 return done(err);
             if (user) {
-				//req.flash('error', 'test error1');
-				//res.render('signup',  {errors: req.flash('error'), infos: req.flash('info'), successes: req.flash('success')})
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+				return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
                 var newUser            		= new User();
 				newUser.local.firstname    	= req.body.firstname;

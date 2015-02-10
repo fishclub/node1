@@ -47,7 +47,7 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 	
-	app.get('/addnote', function(req, res) {
+	/*app.get('/addnote', function(req, res) {
         res.render('addnote.ejs', { message: req.flash('loginMessage') }); 
     });
 	 
@@ -55,7 +55,7 @@ module.exports = function(app, passport) {
         successRedirect : '/', // redirect to the secure profile section
         failureRedirect : '/addnote', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-    }));
+    }));*/
 
     app.get('/addbeer', function(req, res) {
 		beer = new Beers();

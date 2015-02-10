@@ -25,7 +25,7 @@ module.exports = function(passport) {
             if (err)
                 return done(err);
             if (user) {
-				return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+				return done(null, false, req.flash('signupMessage', 'Email account is already exists'));
             } else {
                 var newUser            		= new User();
 				newUser.local.firstname    	= req.body.firstname;

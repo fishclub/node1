@@ -2,12 +2,15 @@
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var crypto = require('crypto');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
 
     local            : {
         email        : String,
+		firstname	 : String,
+		lastname	 : String,
         password     : String,
         resetPasswordToken      : String,
         resetPasswordExpires    : Date
@@ -44,5 +47,12 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
+/*userSchema.methods.generateToken = function() {
+    var genToken;
+	crypto.randomBytes(20, function(err, buf) {
+		genToken = buf.toString('hex');
+	});
+	return genToken;
+};*/
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

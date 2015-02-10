@@ -26,10 +26,12 @@
 
                     <p>
                         <strong>id</strong>: <%= user._id %><br>
+						<strong>firstname</strong>: <%= user.local.firstname %><br>
+						<strong>lastname</strong>: <%= user.local.lastname %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
                         <strong>password</strong>: <%= user.local.password %><br>
-						<strong>password</strong>: <%= user.local.resetPasswordToken %><br>
-						<strong>password</strong>: <%= user.local.resetPasswordExpires %>
+						<strong>token</strong>: <%= user.local.resetPasswordToken %><br>
+						<strong>expire</strong>: <%= user.local.resetPasswordExpires %>
                     </p>
 
             </div>

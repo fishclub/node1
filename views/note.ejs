@@ -16,16 +16,18 @@
 
     <h1><span class="fa fa-sign-in"></span> Forgot Password</h1>
 
-	<% if (errors) { %>
+	<% if (errors.length > 0) { %>
         <div class="alert alert-danger"><%= errors %></div>
     <% } %>
-	<% if (infos) { %>
+	<% if (infos.length > 0) { %>
         <div class="alert alert-info"><%= infos %></div>
     <% } %>
-	<% if (successes) { %>
+	<% if (successes.length > 0) { %>
         <div class="alert alert-success"><%= successes %></div>
     <% } %>
-
+	<% if (message.length > 0) { %>
+        <div class="alert alert-<%= type %>"><%= message %></div>
+    <% } %>
     <form action="/note" method="post">
        
     </form>

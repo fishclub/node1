@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
 	}));
 
     app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { message: req.flash('signupMessage') });
+		res.render('signup.ejs', { message: req.flash('signupMessage'), type: 'danger' });
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
@@ -227,7 +227,7 @@ module.exports = function(app, passport) {
 		req.flash('error', 'test error2');
 		req.flash('info', 'test info');
 		req.flash('success', 'test success');
-		res.render('note',  {errors: req.flash('error'), infos: req.flash('info'), successes: req.flash('success')});
+		res.render('note',  {message: req.flash('error'), type: 'danger', errors: req.flash('error'), infos: req.flash('info'), successes: req.flash('success')});
 	});
 };
 
